@@ -7,22 +7,17 @@ pipeline {
     }
     
     stages {
-        stage("Checkout") {
-            steps {
-                git branch: "main", url: "https://github.com/codeyjoseph/lbg-hello-world-maven.git"
-            }
-        }
-        stage("Compile") {
+        stage("Build") {
             steps {
                 sh 'mvn clean compile'
             }
         }
         stage("Test") {
             steps {
-                sh "mvn -Dmaven.compile.skip test"
+                sh "mvn test"
             }
         }
-        stage("Package") {
+        stage("Deploy") {
             steps {
                 sh "mvn -Dmaven.compile.skip -Dmaven.compile.skip package"
             }
